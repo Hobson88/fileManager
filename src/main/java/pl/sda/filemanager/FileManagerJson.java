@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,6 +23,11 @@ public class FileManagerJson implements FileManager {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.metaDataFile = path;
         try {
+            if(!Files.exists(path)){
+                FilesMetaData defaultContent = new FilesMetaData();
+                Files.createFile(path);
+                objectMapper.writeValue(metaDataFile.toFile(), defaultContent);
+            }
             filesMetaData = objectMapper.readValue(metaDataFile.toFile(), FilesMetaData.class);
         } catch (IOException e) {
             throw new FileManagerException("Can not read the json file.", e);
@@ -30,11 +36,17 @@ public class FileManagerJson implements FileManager {
 
     @Override
     public void addTag(String tag, Path path) throws FileManagerException {
+        boolean isFileNeverTagBefore = true;
         for (FileEntry fe : filesMetaData.getEntries()) {
             if (fe.getPath().equals(path.toString())) {
                 fe.addTag(tag);
+                isFileNeverTagBefore = false;
             }
         }
+        if (isFileNeverTagBefore){
+            filesMetaData.createEntry(tag, path);
+        }
+
         try {
             objectMapper.writeValue(metaDataFile.toFile(), filesMetaData);
         } catch (IOException e) {

@@ -1,5 +1,6 @@
 package pl.sda.filemanager;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -7,6 +8,9 @@ public class FileEntry {
     private String path;
     private Set<String> tags;
 
+    public FileEntry() {
+        tags = new HashSet<>();
+    }
     public String getPath() {
         return path;
     }
