@@ -1,4 +1,4 @@
-package pl.sda.jackson;
+package pl.sda.filemanager;
 
 import java.util.Objects;
 import java.util.Set;
