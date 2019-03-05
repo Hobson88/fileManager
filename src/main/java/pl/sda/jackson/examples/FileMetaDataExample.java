@@ -1,7 +1,8 @@
-package pl.sda.jackson;
+package pl.sda.jackson.examples;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import pl.sda.jackson.FilesMetaData;
 
 import java.io.IOException;
 import java.nio.file.Paths;

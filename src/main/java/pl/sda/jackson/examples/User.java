@@ -1,4 +1,4 @@
-package pl.sda.jackson;
+package pl.sda.jackson.examples;
 
 public class User {
     private String name;
