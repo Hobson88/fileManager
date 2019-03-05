@@ -23,6 +23,10 @@ public class FileEntry {
         this.tags = tags;
     }
 
+    public void addTag (String tag){
+        tags.add(tag);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

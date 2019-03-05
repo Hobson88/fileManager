@@ -1,0 +1,16 @@
+{
+  "entries" : [ {
+    "path" : "D:\\test1.txt",
+    "tags" : [ "document", "tag" ]
+  }, {
+    "path" : "D:\\test2.txt",
+    "tags" : [ "music" ]
+  }, {
+    "path" : "D:\\test3.txt",
+    "tags" : [ "document", "disco" ]
+  }, {
+    "path" : "D:\\test4.txt",
+    "tags" : [ "Science", "video" ]
+  } ],
+  "version" : "0.0.1"
+}
