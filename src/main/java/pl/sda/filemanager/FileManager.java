@@ -25,4 +25,13 @@ public interface FileManager {
      */
     List<Path> findFilesByTag(String tag) throws FileManagerException;
 
+    /**
+     * Znajduje pliki z zadanym rozszerzeniem i przydziela im tag.
+     *
+     * @param tag tag, który przypiszemy plikom
+     * @param rootPath ścieżka katalogu, w którym rozpoczynamy szukanie plików w sposób rekursywny
+     * @param extension rozszerzenie, które chcemy znaleźć
+     * @throws FileManagerException jeśli filemanager nie zadziała
+     */
+    void addTag(String tag, Path rootPath, String extension) throws FileManagerException;
 }

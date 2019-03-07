@@ -59,10 +59,43 @@ public class FileManagerJsonTest {
         assertThat(matchingFiles).containsOnly(Paths.get("test1.mp4"));
     }
 
+    @DisplayName(
+            "Mając podaną ścieżkę do katalogu zawierającego pliki mp3,"
+                    + "chcemy przypisać wszystkim znalezionym plikom tag music"
+    )
+    @Test
+    void test2() throws Exception {
+        //given
+        Path tempDB = Files.createTempFile("DB_", ".json");
+        FileManager fileManager = new FileManagerJson(tempDB);
+        // create test directory structure
+        // test-work-dir-<hash>
+        // |_test0.mp3
+        // |_test1.mp4
+        // |_dir-0
+        // |__test2.mp3
+        // |__test3.txt
+        Path rootDir = Files.createTempDirectory("test-work-dir");
+        Path test0Mp3File = Files.createFile(rootDir.resolve("test0.mp3"));
+        Files.createFile(rootDir.resolve("test1.mp4"));
+        Path dir0 = Files.createDirectory(rootDir.resolve("dir-0"));
+        Path test2Mp3File = Files.createFile(dir0.resolve("test2.mp3"));
+        Files.createFile(dir0.resolve("test3.txt"));
+
+        //when
+        fileManager.addTag("music", rootDir, ".mp3");
+
+        //then
+        List<Path> allMusicFiles = fileManager.findFilesByTag("music");
+        assertThat(allMusicFiles).containsExactlyInAnyOrder(test0Mp3File, test2Mp3File);
+    }
+
     private Path metdataWithAudioAndVideoTags() throws IOException {
         Path metadata = Files.createTempFile("metadata", ".json");
         InputStream exampleMetadata = getClass().getResourceAsStream("/audio-and-video-metadata.json");
         Files.copy(exampleMetadata, metadata, StandardCopyOption.REPLACE_EXISTING);
         return metadata;
     }
+
+
 }

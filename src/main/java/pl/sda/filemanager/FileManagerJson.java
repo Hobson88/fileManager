@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,4 +71,43 @@ public class FileManagerJson implements FileManager {
         }
         return foundFilesByTag;
     }
+
+    @Override
+    public void addTag(String tag, Path rootPath, String extension) throws FileManagerException {
+
+        FileVisitor fileVisitor = new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                if (file.getFileName().toString().endsWith(extension)){
+                    addTag(tag, file);
+                }
+                return  FileVisitResult.CONTINUE;
+            }
+        };
+        try {
+            Files.walkFileTree(rootPath, fileVisitor);
+        } catch (IOException e) {
+            throw new FileManagerException("Failed to traverse root file: "+rootPath, e);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
