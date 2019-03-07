@@ -12,6 +12,9 @@ public class CliController {
         if (args[0].equals("find")){
             fileManager.findFilesByTag(args[1]).forEach(System.out::println);
         }
+        if (args[0].equals("addMultiTag")){
+            fileManager.addTag(args[1],Paths.get(args[2]),args[3]);
+        }
     }
 
 
