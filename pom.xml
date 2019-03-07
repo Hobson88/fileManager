@@ -45,6 +45,31 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${jupiter.api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${jupiter.engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${jupiter.params.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
@@ -60,6 +85,10 @@
         <jackson.version>
             2.9.8
         </jackson.version>
+        <jupiter.api.version>5.4.0</jupiter.api.version>
+        <jupiter.engine.version>5.4.0</jupiter.engine.version>
+        <assertj.core.version>3.12.1</assertj.core.version>
+        <jupiter.params.version>5.4.0</jupiter.params.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
     </properties>
 </project>
