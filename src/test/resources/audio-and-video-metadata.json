@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "entries": [
+    {
+      "path": "test0.mp3",
+      "tags": [
+        "audio"
+      ]
+    },
+    {
+      "path": "test1.mp4",
+      "tags": [
+        "video"
+      ]
+    }
+  ]
+}

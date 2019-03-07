@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileManagerJson implements FileManager {
     private Path metaDataFile;
@@ -23,15 +22,20 @@ public class FileManagerJson implements FileManager {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.metaDataFile = path;
         try {
-            if(!Files.exists(path)){
-                FilesMetaData defaultContent = new FilesMetaData();
+            FilesMetaData defaultContent = new FilesMetaData();
+            if (!Files.exists(path)) {
                 Files.createFile(path);
-                objectMapper.writeValue(metaDataFile.toFile(), defaultContent);
             }
+            if (fileIsInvalid(path))
+                objectMapper.writeValue(metaDataFile.toFile(), defaultContent);
             filesMetaData = objectMapper.readValue(metaDataFile.toFile(), FilesMetaData.class);
         } catch (IOException e) {
             throw new FileManagerException("Can not read the json file.", e);
         }
+    }
+
+    private boolean fileIsInvalid(Path path) throws IOException {
+        return Files.readAllLines(path).isEmpty();
     }
 
     @Override
