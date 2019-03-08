@@ -3,3 +3,5 @@ target
 filemanager.iml
 metadaOut.json
 db.json
+*.mp3
+*.txt
