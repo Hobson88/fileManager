@@ -20,6 +20,7 @@ public class FileDownladerHTTP implements FileDownloader {
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpResponse response = httpClient.execute(new HttpGet(url.toURI()));
             Files.copy(response.getEntity().getContent(), target);
+
         } catch (IOException | URISyntaxException e) {
             throw new FileDownloaderException(String.format("Failed to download file from URL %s", url), e);
         }
